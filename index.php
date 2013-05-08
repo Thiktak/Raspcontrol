@@ -9,12 +9,12 @@ session_start();
 
 require 'config.php';
 
+// param page
+$get_page = filter_input(INPUT_GET, 'page') ?: 'home';
+$get_page = strtr($get_page, array(DIRECTORY_SEPARATOR => null, '\\' => null));
+
 // authentification
 if (isset($_SESSION['authentificated']) && $_SESSION['authentificated']) {
-  if (empty($_GET['page'])) $_GET['page'] = 'home';
-  $_GET['page'] = htmlspecialchars($_GET['page']);
-  str_replace("\0", '', $_GET['page']);
-  str_replace(DIRECTORY_SEPARATOR, '', $_GET['page']);
   $display = true;
   function is_active($page) {
     if ($page == $_GET['page'])
@@ -26,7 +26,7 @@ else {
   $display = false;
 }
 
-$page = 'pages'. DIRECTORY_SEPARATOR.$_GET['page']. '.php';
+$page = 'pages'. DIRECTORY_SEPARATOR . $get_page. '.php';
 $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
 
 ?><!DOCTYPE html>
@@ -103,6 +103,6 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
     </footer>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
   </body>
 </html>
