@@ -5,6 +5,7 @@ if( !defined('FILE_CMD') )
 
 $get_cmd = filter_input(INPUT_GET, 'cmd') ?: null;
 $get_run = filter_input(INPUT_GET, 'run') ?: false;
+$get_params = (array) (isset($_GET['param']) ? $_GET['param'] : null);
 
 $listOfCmd = \lib\cmd\cmd::getListOfCmd();
 
@@ -15,8 +16,9 @@ if( $get_cmd ) {
     if( $get_run ) {
         ob_clean();
         try {
+            $CMD = \lib\Cmd\Cmd::create($get_cmd, $get_params);
             set_time_limit(0);
-            echo implode(PHP_EOL, (array) \lib\Cmd\Cmd::create($get_cmd)->exec());
+            echo ($CMD->parseAction(implode(PHP_EOL, (array) $CMD->exec())));
         }
         catch(\Exception $e)
         {
@@ -49,7 +51,7 @@ if( $get_cmd ) {
   <pre id="log"></pre>
 </div>
 <?php
-  $url = _url('cmd', array('cmd' => $get_cmd, 'run'), false, '&');
+  $url = _url('cmd', $_GET + array('cmd' => $get_cmd, 'run'), false, '&');
 
   $js[] = '<script>';
 
@@ -68,7 +70,7 @@ if( $get_cmd ) {
   $js[] = '    $.get(\'' . $url . '\')';
   $js[] = '    .done(function(datas) {';
   $js[] = '      addToLogs(\'> command done !\', \'cmd\');';
-  $js[] = '      addToLogs(datas, \'datas\');';
+  $js[] = '      addToLogs(\'<code>\' + datas + \'</code>\', \'datas\');';
 
   if( $listOfCmd[$get_cmd]['refresh'] ) {
     $js[] = '      addToLogs(\'> refresh mode activated (try each ' . $listOfCmd[$get_cmd]['refresh'] . ' sec)\');';

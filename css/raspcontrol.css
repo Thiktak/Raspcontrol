@@ -150,12 +150,21 @@ div.details table tr { border-top: 5px solid white; }
 
 div.cmd .list-cmd { margin: 0; padding: 0; text-align: center; }
 div.cmd .list-cmd li { margin: 0; padding: 0; list-style-type: none; display: inline-block; width: 30%; }
-div.cmd .list-cmd .btn { margin: .5%; padding: 1em 1%; display: block; }
+div.cmd .list-cmd .btn { margin: 1.25% .5%; padding: 1em 1%; display: block; }
 div.cmd .list-cmd .btn > i {  margin-bottom: 10px; }
 div.cmd .list-cmd .btn > span { display: block; }
 div.cmd .cmd-msg-cmd { color: green; font-weight: bold; }
 div.cmd .cmd-msg-msg { color: red; }
 div.cmd .cmd-msg-datas {  }
+
+#content > div > h1 { font-size: 2em; margin: 0; margin-bottom: .5em; line-height: 1em; border-bottom: 1px solid #eaeaea; }
+
+pre code {
+  background-color: black;
+  color: white;
+  display: block;
+  padding: .5em 1em;
+}
 
 /*
  * Mediaqueries

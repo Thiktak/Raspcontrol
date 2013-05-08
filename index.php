@@ -68,7 +68,8 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
           <div class="nav-collapse collapse">
 			  <ul class="nav">
 				<li<?php is_active('home'); ?>><a href="<?php _url('/'); ?>"><i class="icon-home icon-white"></i> Home</a></li>
-				<li<?php is_active('details'); ?>><a href="<?php _url('details'); ?>"><i class="icon-search icon-white"></i> Details</a></li>
+        <li<?php is_active('details'); ?>><a href="<?php _url('details'); ?>"><i class="icon-search icon-white"></i> Details</a></li>
+        <li<?php is_active('cmd'); ?>><a href="<?php _url('cmd'); ?>"><i class="icon-play icon-white"></i> Commands</a></li>
 			  </ul>
 			  <ul class="nav pull-right">
 				<li><a href="login.php?logout"><i class="icon-off icon-white"></i> Logout</a></li>
