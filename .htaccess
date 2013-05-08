@@ -11,4 +11,4 @@ Options -Indexes
 SetEnv HTTP_MOD_REWRITE On
 
 RewriteEngine On
-RewriteRule ^([A-Za-z0-9]+)$  index.php?page=$1
+RewriteRule ^([A-Za-z0-9]+)$  index.php?page=$1 [QSA]
