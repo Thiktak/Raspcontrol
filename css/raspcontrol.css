@@ -147,6 +147,16 @@ div.details table tr { border-top: 5px solid white; }
 .details tr:hover td.check,
 .details tr:target td.check { background-color: rgba(200, 200, 255, .25); }
 
+
+div.cmd .list-cmd { margin: 0; padding: 0; text-align: center; }
+div.cmd .list-cmd li { margin: 0; padding: 0; list-style-type: none; display: inline-block; width: 30%; }
+div.cmd .list-cmd .btn { margin: .5%; padding: 1em 1%; display: block; }
+div.cmd .list-cmd .btn > i {  margin-bottom: 10px; }
+div.cmd .list-cmd .btn > span { display: block; }
+div.cmd .cmd-msg-cmd { color: green; font-weight: bold; }
+div.cmd .cmd-msg-msg { color: red; }
+div.cmd .cmd-msg-datas {  }
+
 /*
  * Mediaqueries
  */
