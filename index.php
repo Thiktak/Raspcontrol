@@ -22,7 +22,7 @@ if (isset($_SESSION['authentificated']) && $_SESSION['authentificated']) {
   }
 }
 else {
-  $_GET['page'] = 'login';
+  $get_page = 'login';
   $display = false;
 }
 
@@ -49,8 +49,8 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
 
     <header>
       <div class="container">
-        <a href="<?php echo INDEX; ?>"><img src="img/raspcontrol.png" alt="rbpi" /></a>
-        <h1><a href="<?php echo INDEX; ?>">Raspcontrol</a></h1>
+        <a href="<?php _url('/'); ?>"><img src="img/raspcontrol.png" alt="rbpi" /></a>
+        <h1><?php _link('Raspcontrol', '/'); ?></h1>
         <h2>The Raspberry Pi Control Center</h2>
       </div>
     </header>
@@ -67,11 +67,11 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
           </a>
           <div class="nav-collapse collapse">
 			  <ul class="nav">
-				<li<?php is_active('home'); ?>><a href="<?php echo INDEX; ?>"><i class="icon-home icon-white"></i> Home</a></li>
-				<li<?php is_active('details'); ?>><a href="<?php echo DETAILS; ?>"><i class="icon-search icon-white"></i> Details</a></li>
+				<li<?php is_active('home'); ?>><a href="<?php _url('/'); ?>"><i class="icon-home icon-white"></i> Home</a></li>
+				<li<?php is_active('details'); ?>><a href="<?php _url('details'); ?>"><i class="icon-search icon-white"></i> Details</a></li>
 			  </ul>
 			  <ul class="nav pull-right">
-				<li><a href="<?php echo LOGOUT; ?>"><i class="icon-off icon-white"></i> Logout</a></li>
+				<li><a href="login.php?logout"><i class="icon-off icon-white"></i> Logout</a></li>
 			  </ul>
           </div>
         </div>
