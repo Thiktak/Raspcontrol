@@ -39,14 +39,19 @@ else {
  * _url('page', null, false, '&')
  */
 function _url($page, $arguments = null, $display = true, $separator = '&amp;') {
-    $page = explode('#', $page . '#', 2);
+    $page = explode('#', ltrim($page, '/') . '#', 2);
 
+    foreach( (array) $arguments as $key => $val )
+        if( is_numeric($key) ) {
+            unset($arguments[$key]);
+            $arguments[$val] = 1;
+        }
     $arguments = $arguments ? '?' . http_build_query((array) $arguments, null, $separator) : null;
     
-    $url  = HTTP_MOD_REWRITE ? './' . $page[0] : './index.php?page=' . $page[0];
+    $url  = HTTP_MOD_REWRITE ? $page[0] : ($page[0] ? 'index.php?page=' . $page[0] : null);
     $url .= $arguments;
     $url .= '#' . $page[1];
-    $url = trim($url, ' #');
+    $url = './' . trim($url, ' #');
 
     if( !$display )
       return $url;
