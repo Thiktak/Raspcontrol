@@ -34,7 +34,7 @@ else if (isset($_POST['username']) && isset($_POST['password']) && !empty($_POST
   }
 }
 
-header('Location: '.INDEX);
+header('Location: ' . _url('/', null, false, '&'));
 exit();
 
 ?>

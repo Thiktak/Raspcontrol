@@ -24,18 +24,18 @@ $network = Network::connections();
 $users = sizeof(Users::connected());
 
 function icon_alert($alert) {
-  echo '<i class="icon-';
+  $icon = '<i class="icon-';
   switch($alert) {
     case 'success':
-      echo 'ok';
+      $icon .= 'ok';
       break;
     case 'warning':
-      echo 'warning-sign';
+      $icon .= 'warning-sign';
       break;
     default:
-      echo 'exclamation-sign';
+      $icon .= 'exclamation-sign';
   }
-  echo ' pull-right"></i>';
+  return $icon . ' pull-right"></i>';
 }
 
 ?>
@@ -55,34 +55,34 @@ function icon_alert($alert) {
 
         <div class="infos">
           <div>
-            <a href="<?php echo DETAILS; ?>#check-uptime"><i class="icon-time"></i></a> <?php echo $uptime; ?>
+            <a href="<?php _url('details#check-uptime'); ?>"><i class="icon-time"></i></a> <?php echo $uptime; ?>
           </div>
         </div>
 
         <div class="row-fluid">
           <div class="span4 rapid-status">
             <div>
-              <i class="icon-asterisk"></i> RAM <a href="<?php echo DETAILS; ?>#check-ram"><?php echo icon_alert($ram['alert']); ?></a>
+              <i class="icon-asterisk"></i> RAM <?php echo _link(icon_alert($ram['alert']), 'details#check-ram'); ?>
             </div>
             <div>
-              <i class="icon-refresh"></i> Swap <a href="<?php echo DETAILS; ?>#check-swap"><?php echo icon_alert($swap['alert']); ?></a>
+              <i class="icon-refresh"></i> Swap <?php echo _link(icon_alert($swap['alert']), 'details#check-swap'); ?>
             </div>
             <div>
-              <i class="icon-tasks"></i> CPU <a href="<?php echo DETAILS; ?>#check-cpu"><?php echo icon_alert($cpu['alert']); ?></a>
+              <i class="icon-tasks"></i> CPU <?php echo _link(icon_alert($cpu['alert']), 'details#check-cpu'); ?>
             </div>
             <div>
-              <i class="icon-fire"></i> CPU <a href="<?php echo DETAILS; ?>#check-cpu-heat"><?php echo icon_alert($cpu_heat['alert']); ?></a>
+              <i class="icon-fire"></i> CPU (°C) <?php echo _link(icon_alert($cpu_heat['alert']), 'details#check-cpu-heat'); ?>
             </div>
           </div>
           <div class="span4 offset4 rapid-status">
             <div>
-              <i class="icon-hdd"></i> Storage <a href="<?php echo DETAILS; ?>#check-storage"><?php echo icon_alert($hdd_alert); ?></a>
+              <i class="icon-hdd"></i> Storage <?php echo _link(icon_alert($hdd_alert), 'details#check-storage'); ?>
             </div>
             <div>
-              <i class="icon-globe"></i> Network <a href="<?php echo DETAILS; ?>#check-network"><?php echo icon_alert($network['alert']); ?></a>
+              <i class="icon-globe"></i> Network <?php echo _link(icon_alert($network['alert']), 'details#check-network'); ?>
             </div>
             <div>
-              <i class="icon-user"></i> Users <a href="<?php echo DETAILS; ?>#check-users"><span class="badge pull-right"><?php echo $users; ?></span></a>
+              <i class="icon-user"></i> Users <?php echo _link('<span class="badge pull-right">' . $users . '</span>', 'details#check-users'); ?>
             </div>
           </div>
         </div>
