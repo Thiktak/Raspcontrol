@@ -11,6 +11,4 @@ Options -Indexes
 SetEnv HTTP_MOD_REWRITE On
 
 RewriteEngine On
-RewriteRule ^details$ index.php?page=details
-RewriteRule ^logout$ login.php?logout
 RewriteRule ^([A-Za-z0-9]+)$  index.php?page=$1
