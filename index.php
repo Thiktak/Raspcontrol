@@ -70,6 +70,7 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
 				<li<?php is_active('home'); ?>><a href="<?php _url('/'); ?>"><i class="icon-home icon-white"></i> Home</a></li>
         <li<?php is_active('details'); ?>><a href="<?php _url('details'); ?>"><i class="icon-search icon-white"></i> Details</a></li>
         <li<?php is_active('infos'); ?>><a href="<?php _url('infos'); ?>"><i class="icon-tasks icon-white"></i> Stats</a></li>
+        <li<?php is_active('cmd'); ?>><a href="<?php _url('cmd'); ?>"><i class="icon-play icon-white"></i> Commands</a></li>
 			  </ul>
 			  <ul class="nav pull-right">
 				<li><a href="login.php?logout"><i class="icon-off icon-white"></i> Logout</a></li>
@@ -91,9 +92,6 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
       <?php unset($_SESSION['message']); } ?>
       
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 try {
   include $page;
 }
@@ -106,8 +104,6 @@ catch( InternalError $err ) {
     </div>
   </div>
 EOL;
-}
-
 ?>
 
     </div> <!-- /content -->
