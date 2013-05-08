@@ -90,7 +90,19 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
       <?php unset($_SESSION['message']); } ?>
       
 <?php
+try {
   include $page;
+}
+catch( InternalError $err ) {
+  echo <<<EOL
+  <div class="container error">
+    <h1>{$err->getTitle()}</h1>
+    <div class="alert alert-block alert-{$err->getMessageType()}">
+      {$err->getMessage()}
+    </div>
+  </div>
+EOL;
+}
 ?>
 
     </div> <!-- /content -->
@@ -104,5 +116,6 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
   	<script src="js/bootstrap.min.js"></script>
+    <?php echo isset($javascripts) ? $javascripts : null; ?>
   </body>
 </html>
