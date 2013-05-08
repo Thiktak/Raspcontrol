@@ -33,4 +33,37 @@ else {
   define('DETAILS', './?page=details');
 }
 
+/**
+ * _url('page')
+ * _url('page', array('a' => 'b'))
+ * _url('page', null, false, '&')
+ */
+function _url($page, $arguments = null, $display = true, $separator = '&amp;') {
+    $page = explode('#', $page . '#', 2);
+
+    $arguments = $arguments ? '?' . http_build_query((array) $arguments, null, $separator) : null;
+    
+    $url  = HTTP_MOD_REWRITE ? './' . $page[0] : './index.php?page=' . $page[0];
+    $url .= $arguments;
+    $url .= '#' . $page[1];
+    $url = trim($url, ' #');
+
+    if( !$display )
+      return $url;
+    echo $url;
+}
+
+/**
+ * _link('Text') = _link('Text', '#')
+ * _link('Text', 'page')
+ * _link('page', array('a' => 'b'))
+ * _link('page', null, false, '&')
+ */
+function _link($text, $path = '#', $arguments = null, array $options = null) {
+  $options = array_map(function($key, $value) { return ' ' . $key . '="' . addslashes($value) . '"'; }, (array) $options);
+  $options = implode(' ', $options);
+
+  echo '<a href="', _url($path, $arguments, false), '"', $options, '>', $text, '</a>';
+}
+
 ?>
