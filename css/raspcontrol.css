@@ -80,10 +80,11 @@ header img {
 }
 .details tr {
   vertical-align: top;
+  margin-bottom: 1em;
   /*border-bottom: 1px solid #dedede;*/
 }
 .details td {
-  padding: 20px 0;
+  padding: 20px 1em;
 }
 .details td.check {
   font-weight: bold;
@@ -95,7 +96,7 @@ header img {
   padding-right: 20px;
 }
 .details .storage td {
-  padding: 15px 0;
+  padding: 15px 1em;
 }
 
 .details .progress {
@@ -140,6 +141,11 @@ footer a {
 footer a:hover {
   color: #fff;
 }
+
+div.details table tr { border-top: 5px solid white; }
+.details tr > *:first-child { border-radius: .5em; }
+.details tr:hover td.check,
+.details tr:target td.check { background-color: rgba(200, 200, 255, .25); }
 
 /*
  * Mediaqueries
