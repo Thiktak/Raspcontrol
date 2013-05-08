@@ -68,7 +68,8 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
           <div class="nav-collapse collapse">
 			  <ul class="nav">
 				<li<?php is_active('home'); ?>><a href="<?php _url('/'); ?>"><i class="icon-home icon-white"></i> Home</a></li>
-				<li<?php is_active('details'); ?>><a href="<?php _url('details'); ?>"><i class="icon-search icon-white"></i> Details</a></li>
+        <li<?php is_active('details'); ?>><a href="<?php _url('details'); ?>"><i class="icon-search icon-white"></i> Details</a></li>
+        <li<?php is_active('infos'); ?>><a href="<?php _url('infos'); ?>"><i class="icon-tasks icon-white"></i> Stats</a></li>
 			  </ul>
 			  <ul class="nav pull-right">
 				<li><a href="login.php?logout"><i class="icon-off icon-white"></i> Logout</a></li>
@@ -90,7 +91,23 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
       <?php unset($_SESSION['message']); } ?>
       
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+try {
   include $page;
+}
+catch( InternalError $err ) {
+  echo <<<EOL
+  <div class="container error">
+    <h1>{$err->getTitle()}</h1>
+    <div class="alert alert-block alert-{$err->getMessageType()}">
+      {$err->getMessage()}
+    </div>
+  </div>
+EOL;
+}
+
 ?>
 
     </div> <!-- /content -->
@@ -104,5 +121,6 @@ $page = file_exists($page) ? $page : 'pages'. DIRECTORY_SEPARATOR .'404.php';
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
   	<script src="js/bootstrap.min.js"></script>
+    <?php echo isset($javascripts) ? $javascripts : null; ?>
   </body>
 </html>
