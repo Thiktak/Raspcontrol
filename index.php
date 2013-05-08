@@ -104,6 +104,7 @@ catch( InternalError $err ) {
     </div>
   </div>
 EOL;
+}
 ?>
 
     </div> <!-- /content -->
