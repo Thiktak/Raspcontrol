@@ -7,24 +7,7 @@ spl_autoload_register();
 
 require 'config.php';
 
-echo '<pre>';
-
 $data = array();
-
-/*
-$data['uptime'] = Uptime::uptime();
-
-$t = strtotime($data['uptime'] . ' ago');
-var_dump(array(
-
-    $data['uptime'],
-    time(),
-    strtotime($data['uptime']),
-    time() - $t,
-    (time()-$t)/3600
-
-));
-*/
 
 $data['ram'] = Memory::ram();
 $data['swap'] = Memory::swap();
@@ -35,23 +18,28 @@ $data['net_connections'] = Network::connections();
 $data['net_eth'] = Network::ethernet();
 $data['users'] = Users::connected();
 
+if( !defined('FILE_STATS') ) {
+    define('FILE_STATS', dirname(__FILE__) . '/raspberry.stats');
+    echo 'const FILE_STATS is not defined into condif.php', PHP_EOL;
+    echo ' Add define(\'FILE_STATS\', dirname(__FILE__) . \'/raspberry.stats\');', PHP_EOL, PHP_EOL;
+}
+
 
 $datas = (array) json_decode(file_get_contents(FILE_STATS));
 $datas[time()] = $data;
 file_put_contents(FILE_STATS, json_encode($datas));
 
+echo date('Y-m-d H:i:s'), ' into ', FILE_STATS, PHP_EOL, PHP_EOL;
 
-foreach( $datas as $time => $data )
+foreach( $data as $type => $data )
 {
-    if( isset($data->cpu_heat->degrees) )
-        $graphs['heat'][0][$time] = (int) $data->cpu_heat->degrees;
+  echo '> ', $type, PHP_EOL;
+  foreach( $data as $key => $value ) {
+    echo '  ', $key, ' : ', print_r($value, 1), PHP_EOL;
+  }
+  echo PHP_EOL;
 }
 
-
-print_r($data);
-
-echo '<hr />';
-
-/*print_r($datas);*/
+//print_r($data);
 
 ?>
